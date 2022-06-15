@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.14-MariaDB : Database - fotografi
+SQLyog Enterprise v12.5.1 (32 bit)
+MySQL - 10.4.22-MariaDB : Database - fotografi
 *********************************************************************
 */
 
@@ -33,7 +33,7 @@ CREATE TABLE `menus` (
   PRIMARY KEY (`id`),
   KEY `role_menus` (`role_id`),
   CONSTRAINT `role_menus` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `menus` */
 
@@ -42,7 +42,11 @@ insert  into `menus`(`id`,`name`,`slug`,`icon`,`parrent_id`,`role_id`,`sequence`
 (2,'Master Data','master-data','ni ni-diamond',0,1,2,'2022-06-08 18:55:17','2022-06-08 18:56:52'),
 (3,'Daftar Paket','paket','ni ni-bag-17',2,1,1,'2022-06-08 18:56:50','2022-06-14 16:17:53'),
 (4,'Daftar User','users','ni ni-circle-08',0,1,4,'2022-06-09 17:56:30','2022-06-09 18:09:05'),
-(5,'Pesanan','pesanan','ni ni-money-coins',0,1,3,'2022-06-09 17:58:57','2022-06-09 18:03:41');
+(5,'Pesanan','pesanan','ni ni-money-coins',0,1,3,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
+(6,'Dashboard','dashboard','ni ni-tv-2',0,3,1,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
+(7,'Daftar Paket','paket-c','ni ni-bag-17',0,3,2,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
+(8,'Daftar Transaksi','transaksi-c','ni ni-money-coins',0,3,3,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
+(9,'Jadwal','jadwal-c','ni ni-calendar-grid-58',0,3,4,'2022-06-09 17:58:57','2022-06-09 18:03:41');
 
 /*Table structure for table `packet_images` */
 
@@ -52,22 +56,22 @@ CREATE TABLE `packet_images` (
   `id_packet_images` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `packet_id` bigint(20) unsigned DEFAULT NULL,
   `image_name` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `image_type` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `image_size` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_packet_images`),
   KEY `id_packet_fk` (`packet_id`),
   CONSTRAINT `id_packet_fk` FOREIGN KEY (`packet_id`) REFERENCES `packets` (`id_packet`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `packet_images` */
 
-insert  into `packet_images`(`id_packet_images`,`packet_id`,`image_name`,`image_type`,`image_size`) values 
-(1,1,'paket-1','.jpeg',72),
-(2,2,'paket-2','.jpeg',100),
-(3,3,'paket-3','.jpeg',152),
-(4,4,'paket-4','.jpeg',120),
-(5,5,'paket-5','.jpeg',248),
-(6,6,'paket-6','.jpeg',123);
+insert  into `packet_images`(`id_packet_images`,`packet_id`,`image_name`) values 
+(1,1,'paket-1.jpeg'),
+(2,2,'paket-2.jpeg'),
+(3,3,'paket-3.jpeg'),
+(4,4,'paket-4.jpeg'),
+(5,5,'paket-5.jpeg'),
+(6,6,'paket-6.jpeg'),
+(18,1,'1.png'),
+(19,1,'2.png');
 
 /*Table structure for table `packets` */
 
@@ -83,7 +87,7 @@ CREATE TABLE `packets` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_packet`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `packets` */
 
@@ -114,7 +118,7 @@ CREATE TABLE `roles` (
 insert  into `roles`(`id`,`name`,`slug`,`created_at`,`updated_at`) values 
 (1,'Administrator','admin','2022-06-08 15:41:40',NULL),
 (2,'Fotografer','fotografer','2022-06-09 18:06:46',NULL),
-(3,'Konsumen','konsumen','2022-06-09 18:06:55',NULL);
+(3,'Customer','customer','2022-06-09 18:06:55',NULL);
 
 /*Table structure for table `users` */
 
@@ -136,12 +140,13 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `roles_users` (`role_id`),
   CONSTRAINT `roles_users` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`role_id`,`status`,`images`,`created_at`,`updated_at`) values 
-(84,'Ahmad Fatoni','admin@mindotek.com',NULL,'$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW',NULL,1,1,NULL,'2022-06-08 15:42:08',NULL);
+(84,'Ahmad Fatoni','admin@mindotek.com',NULL,'$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW',NULL,1,1,NULL,'2022-06-08 15:42:08',NULL),
+(85,'Customer','customer@mindotek.com',NULL,'$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW',NULL,3,1,NULL,'2022-06-08 15:42:08',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
