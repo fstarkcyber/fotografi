@@ -25,7 +25,7 @@
 							images += '<div><img src="' + base_url + 'assets/img/packets/' + img.image_name + '"></div>';
 						});
 
-						html += '<div class="col-lg-4 col-md-6">' +
+						html += '<div class="col-lg-6 col-md-6">' +
 							'	<div class="card card-pricing border-0 text-center mb-4">' +
 							'		<div class="card-header bg-transparent">' +
 							'			<h4 class="text-uppercase ls-1 text-primary py-3 mb-0">' + val.packet_name + '</h4>' +
