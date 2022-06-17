@@ -7,7 +7,8 @@ class TransaksiModel extends CI_Model
 
 	function GetTransaction($where = null)
 	{
-		$this->db->select('u.name, u.email, u.role_id, p.packet_name, p.packet_duration, p.packet_price, t.*');
+		$this->db->select('u.name, u.email, pt.name as photographer_name, pt.email as photographer_email, u.role_id, p.packet_name, p.packet_duration, p.packet_price, t.*');
+		$this->db->join('users as pt', 'pt.id = t.photographer_id', 'LEFT');
 		$this->db->join('users as u', 'u.id = t.customer_id', 'LEFT');
 		$this->db->join('packets as p', 'p.id_packet = t.packet_id', 'LEFT');
 		$this->db->from($this->table . ' as t');
