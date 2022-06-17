@@ -1,0 +1,114 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Transaksi extends MY_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('TransaksiModel');
+		$this->load->helper('upload');
+	}
+
+	public function index()
+	{
+		$this->session->set_userdata(['menu_active' => 'transaksi', 'sub_menu_active' => '']);
+		$menu = $this->MenusModel->getMenu();
+
+		$data = [
+			'content' => 'components/transaksi',
+			'plugin' => 'plugins/transaksi',
+			'css' => 'css/transaksi',
+			'menus' => fetch_menu($menu)
+		];
+
+		$this->load->view('layouts/app', $data);
+	}
+
+	public function GetTransaction()
+	{
+		$data = [];
+		$trx = $this->TransaksiModel->GetTransaction()->result();
+
+		$status = '';
+		$action = '';
+
+		foreach ($trx as $tr) {
+			$date = $tr->datetime;
+
+			if ($tr->payment_date == NULL || $tr->payment_image == NULL) {
+				$status = '<span class="badge badge-danger">Menunggu Pembayaran</span>';
+			} else if ($tr->payment_validation_at == NULL || $tr->payment_validation_by == NULL) {
+				$action .= '<a target="_blank" href="' . base_url('assets/img/transactions/' . $tr->payment_image) . '" class="table-action text-success" title="Lihat Bukti Pembayaran"><i class="fas fa-eye"></i> Bukti Pembayaran</a>';
+				$action .= '<a data-date="' . date('Y-m-d\TH:i', strtotime($tr->datetime)) . '" data-id="' . $tr->id_transaction . '" href="#" class="table-action text-primary btn-validation" title="Validasi Pembayaran"><i class="fas fa-check"></i> Validasi</a>';
+				$status = '<span class="badge badge-warning">Menunggu Validasi</span>';
+			} else {
+				if ($tr->datetime != $tr->datetime_fix) {
+					$date = $tr->datetime_fix;
+				}
+				$status .= '<span class="badge badge-success">Validasi Berhasil</span>';
+				$status .= '<span class="badge badge-danger">Jadwal di ubah</span>';
+			}
+
+			$data[] = array(
+				'booking_code' => $tr->booking_code,
+				'created_at' => $tr->created_at,
+				'customer_id' => $tr->customer_id,
+				'datetime' => date('d-m-Y H:i:s', strtotime($tr->datetime)),
+				'email' => $tr->email,
+				'id_transaction' => $tr->id_transaction,
+				'name' => $tr->name,
+				'note' => $tr->note,
+				'packet_duration' => $tr->packet_duration,
+				'packet_id' => $tr->packet_id,
+				'packet_name' => $tr->packet_name,
+				'packet_price' => number_format($tr->packet_price),
+				'payment_date' => $tr->payment_date,
+				'payment_image' => $tr->payment_image,
+				'payment_validation_at' => $tr->payment_validation_at,
+				'payment_validation_by' => $tr->payment_validation_by,
+				'photographer_finish_confirm' => $tr->photographer_finish_confirm,
+				'photographer_id' => $tr->photographer_id,
+				'photographer_take_booking' => $tr->photographer_take_booking,
+				'role_id' => $tr->role_id,
+				'updated_at' => $tr->updated_at,
+				'status' => $status,
+				'action' => $action
+			);
+		}
+
+		echo json_encode($data);
+	}
+
+	public function payment_validation()
+	{
+		$id_transaction = str_replace("'", "", htmlspecialchars($this->input->post('id_transaction'), ENT_QUOTES));
+		$data['datetime_fix'] = str_replace("'", "", htmlspecialchars($this->input->post('datetime_fix'), ENT_QUOTES));
+		$data['payment_validation_at'] = date('Y-m-d H:i:s');
+		$data['payment_validation_by'] = $this->session->userdata('id');
+
+		// var_dump($data);
+		// die;
+
+		$act = $this->TransaksiModel->update($data, $id_transaction);
+
+		// echo $this->db->last_query($act);
+		// die;
+
+		if ($act) {
+			$response = array(
+				'type' => 'success',
+				'title' => 'Berhasil !!!',
+				'message' => 'Validasi berhasil, transaksi akan di lanjutkan kepada fotografer !.'
+			);
+		} else {
+			$response = array(
+				'type' => 'warning',
+				'title' => 'Gagal !!!',
+				'message' => 'Validasi gagal, silahkan submit ulang !'
+			);
+		}
+
+		echo json_encode($response);
+	}
+}

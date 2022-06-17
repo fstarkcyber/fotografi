@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v12.5.1 (32 bit)
-MySQL - 10.4.22-MariaDB : Database - fotografi
+SQLyog Ultimate v12.5.1 (64 bit)
+MySQL - 10.4.14-MariaDB : Database - fotografi
 *********************************************************************
 */
 
@@ -33,7 +33,7 @@ CREATE TABLE `menus` (
   PRIMARY KEY (`id`),
   KEY `role_menus` (`role_id`),
   CONSTRAINT `role_menus` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `menus` */
 
@@ -41,12 +41,14 @@ insert  into `menus`(`id`,`name`,`slug`,`icon`,`parrent_id`,`role_id`,`sequence`
 (1,'Dashboard','dashboard','ni ni-tv-2',0,1,1,'2022-06-08 18:44:14','2022-06-08 18:56:51'),
 (2,'Master Data','master-data','ni ni-diamond',0,1,2,'2022-06-08 18:55:17','2022-06-08 18:56:52'),
 (3,'Daftar Paket','paket','ni ni-bag-17',2,1,1,'2022-06-08 18:56:50','2022-06-14 16:17:53'),
-(4,'Daftar User','users','ni ni-circle-08',0,1,4,'2022-06-09 17:56:30','2022-06-09 18:09:05'),
-(5,'Pesanan','pesanan','ni ni-money-coins',0,1,3,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
+(4,'Daftar User','users','ni ni-circle-08',0,1,5,'2022-06-09 17:56:30','2022-06-16 15:20:43'),
+(5,'Daftar Transaksi','transaksi','ni ni-money-coins',0,1,3,'2022-06-09 17:58:57','2022-06-17 16:18:32'),
 (6,'Dashboard','dashboard','ni ni-tv-2',0,3,1,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
 (7,'Daftar Paket','paket-c','ni ni-bag-17',0,3,2,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
-(8,'Daftar Transaksi','transaksi-c','ni ni-money-coins',0,3,3,'2022-06-09 17:58:57','2022-06-09 18:03:41'),
-(9,'Jadwal','jadwal-c','ni ni-calendar-grid-58',0,3,4,'2022-06-09 17:58:57','2022-06-09 18:03:41');
+(8,'Riwayat Transaksi','transaksi-c','ni ni-money-coins',0,3,4,'2022-06-09 17:58:57','2022-06-16 15:16:31'),
+(9,'Jadwal','jadwal-c','ni ni-calendar-grid-58',0,3,5,'2022-06-09 17:58:57','2022-06-16 14:15:14'),
+(10,'Booking','booking-c','ni ni-time-alarm',0,3,3,'2022-06-09 17:58:57','2022-06-16 14:27:04'),
+(11,'Daftar Jadwal','jadwal','ni ni-calendar-grid-58',0,1,4,'2022-06-09 17:58:57','2022-06-16 15:20:51');
 
 /*Table structure for table `packet_images` */
 
@@ -119,6 +121,39 @@ insert  into `roles`(`id`,`name`,`slug`,`created_at`,`updated_at`) values
 (1,'Administrator','admin','2022-06-08 15:41:40',NULL),
 (2,'Fotografer','fotografer','2022-06-09 18:06:46',NULL),
 (3,'Customer','customer','2022-06-09 18:06:55',NULL);
+
+/*Table structure for table `transactions` */
+
+DROP TABLE IF EXISTS `transactions`;
+
+CREATE TABLE `transactions` (
+  `id_transaction` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `packet_id` bigint(20) unsigned NOT NULL,
+  `customer_id` bigint(20) unsigned DEFAULT NULL COMMENT 'customer id',
+  `booking_code` varchar(20) DEFAULT NULL,
+  `datetime` datetime DEFAULT NULL,
+  `datetime_fix` datetime DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `payment_image` varchar(50) DEFAULT NULL,
+  `payment_date` datetime DEFAULT NULL,
+  `payment_validation_at` datetime DEFAULT NULL,
+  `payment_validation_by` bigint(20) unsigned DEFAULT NULL,
+  `photographer_id` bigint(20) unsigned DEFAULT NULL,
+  `photographer_take_booking` datetime DEFAULT NULL,
+  `photographer_finish_confirm` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id_transaction`),
+  KEY `trx_user_id_fk` (`customer_id`),
+  KEY `trx_packet_fk` (`packet_id`),
+  CONSTRAINT `trx_packet_fk` FOREIGN KEY (`packet_id`) REFERENCES `packets` (`id_packet`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `trx_user_id_fk` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `transactions` */
+
+insert  into `transactions`(`id_transaction`,`packet_id`,`customer_id`,`booking_code`,`datetime`,`datetime_fix`,`note`,`payment_image`,`payment_date`,`payment_validation_at`,`payment_validation_by`,`photographer_id`,`photographer_take_booking`,`photographer_finish_confirm`,`created_at`,`updated_at`) values 
+(3,1,85,'20220616115750','2022-06-17 19:00:00','2022-06-17 20:00:00','Halo kak','20220616115750.jpg','2022-06-16 13:59:37','2022-06-17 12:34:04',84,NULL,NULL,NULL,'2022-06-16 16:57:50','2022-06-17 17:34:04');
 
 /*Table structure for table `users` */
 

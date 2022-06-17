@@ -59,3 +59,11 @@ $route['_login'] = '_Auth/Login/process';
 
 $route['users'] = 'User';
 $route['users/all'] = 'User/show';
+
+$route['transaksi-c'] = 'Transaksi';
+
+
+
+$route['paket-c'] = '_Customer/Paket';
+$route['booking-c'] = '_Customer/Booking';
+$route['transaksi-c'] = '_Customer/Booking/transaksi';

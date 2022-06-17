@@ -10,16 +10,16 @@
 <script src="<?= base_url() ?>assets/vendor/chart.js/dist/Chart.extension.js"></script>
 <script src="<?= base_url() ?>assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
-<!-- Argon JS -->
-<script src="<?= base_url() ?>assets/js/argon.js?v=1.1.0"></script>
-<!-- Demo JS - remove this in your project -->
-<script src="<?= base_url() ?>assets/js/demo.min.js"></script>
-
 <?php
 if (!empty($plugin)) {
 	$this->load->view($plugin);
 }
 ?>
+
+<!-- Argon JS -->
+<script src="<?= base_url() ?>assets/js/argon.js?v=1.1.0"></script>
+<!-- Demo JS - remove this in your project -->
+<script src="<?= base_url() ?>assets/js/demo.min.js"></script>
 
 <script>
 	$('.btn-neutral').hide();
