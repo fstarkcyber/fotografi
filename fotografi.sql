@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 09:06 AM
+-- Generation Time: Jun 18, 2022 at 06:09 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -54,7 +54,10 @@ INSERT INTO `menus` (`id`, `name`, `slug`, `icon`, `parrent_id`, `role_id`, `seq
 (8, 'Riwayat Transaksi', 'transaksi-c', 'ni ni-money-coins', 0, 3, 4, '2022-06-09 17:58:57', '2022-06-16 15:16:31'),
 (9, 'Jadwal', 'jadwal-c', 'ni ni-calendar-grid-58', 0, 3, 5, '2022-06-09 17:58:57', '2022-06-16 14:15:14'),
 (10, 'Booking', 'booking-c', 'ni ni-time-alarm', 0, 3, 3, '2022-06-09 17:58:57', '2022-06-16 14:27:04'),
-(11, 'Daftar Jadwal', 'jadwal', 'ni ni-calendar-grid-58', 0, 1, 4, '2022-06-09 17:58:57', '2022-06-16 15:20:51');
+(11, 'Daftar Jadwal', 'jadwal', 'ni ni-calendar-grid-58', 0, 1, 4, '2022-06-09 17:58:57', '2022-06-16 15:20:51'),
+(12, 'Dashboard', 'dashboard', 'ni ni-tv-2', 0, 2, 1, '2022-06-09 17:58:57', '2022-06-09 18:03:41'),
+(13, 'Daftar Paket', 'paket-f', 'ni ni-bag-17', 0, 2, 2, '2022-06-09 17:58:57', '2022-06-09 18:03:41'),
+(14, 'Jadwal', 'jadwal-f', 'ni ni-calendar-grid-58', 0, 2, 5, '2022-06-09 17:58:57', '2022-06-16 14:15:14');
 
 -- --------------------------------------------------------
 
@@ -164,7 +167,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id_transaction`, `packet_id`, `customer_id`, `booking_code`, `datetime`, `datetime_fix`, `note`, `payment_image`, `payment_date`, `payment_validation_at`, `payment_validation_by`, `photographer_id`, `photographer_take_booking`, `photographer_finish_confirm`, `created_at`, `updated_at`) VALUES
-(3, 1, 85, '20220616115750', '2022-06-17 19:00:00', '2022-06-17 20:00:00', 'Halo kak', '20220616115750.jpg', '2022-06-16 13:59:37', '2022-06-17 12:34:04', 84, NULL, NULL, NULL, '2022-06-16 16:57:50', '2022-06-17 17:34:04');
+(3, 1, 85, '20220616115750', '2022-06-17 19:00:00', '2022-06-17 20:00:00', 'Halo kak', '20220616115750.jpg', '2022-06-16 13:59:37', '2022-06-17 12:34:04', 84, 86, '2022-06-18 17:42:56', NULL, '2022-06-16 16:57:50', '2022-06-18 22:42:56'),
+(4, 1, 85, '20220618173412', '2022-06-19 00:34:00', '2022-06-19 00:34:00', '', '20220618173412.jpg', '2022-06-18 17:34:23', '2022-06-18 17:34:43', 84, NULL, NULL, NULL, '2022-06-18 22:34:12', '2022-06-18 22:34:43');
 
 -- --------------------------------------------------------
 
@@ -192,7 +196,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role_id`, `status`, `images`, `created_at`, `updated_at`) VALUES
 (84, 'Ahmad Fatoni', 'admin@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 1, 1, NULL, '2022-06-08 08:42:08', NULL),
-(85, 'Customer', 'customer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 3, 1, NULL, '2022-06-08 08:42:08', NULL);
+(85, 'Customer', 'customer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 3, 1, NULL, '2022-06-08 08:42:08', NULL),
+(86, 'Fotografer', 'fotografer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 2, 1, NULL, '2022-06-08 08:42:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -249,7 +254,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `packets`
@@ -273,13 +278,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id_transaction` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaction` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- Constraints for dumped tables

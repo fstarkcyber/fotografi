@@ -67,6 +67,9 @@ $route['transaksi-c'] = 'Transaksi';
 $route['paket-c'] = '_Customer/Paket';
 $route['booking-c'] = '_Customer/Booking';
 $route['transaksi-c'] = '_Customer/Booking/transaksi';
+$route['jadwal-c'] = '_Customer/Jadwal';
+
+
 
 $route['paket-f'] = '_Fotografer/Paket';
 $route['jadwal-f'] = '_Fotografer/Jadwal';

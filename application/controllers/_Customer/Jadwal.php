@@ -12,12 +12,12 @@ class Jadwal extends MY_Controller
 
 	public function index()
 	{
-		$this->session->set_userdata(['menu_active' => 'jadwal-f', 'sub_menu_active' => '']);
+		$this->session->set_userdata(['menu_active' => 'jadwal-c', 'sub_menu_active' => '']);
 		$menu = $this->MenusModel->getMenu();
 
 		$data = [
-			'content' => 'components/_fotografer/jadwal',
-			'plugin' => 'plugins/_fotografer/jadwal',
+			'content' => 'components/_Customer/jadwal',
+			'plugin' => 'plugins/_Customer/jadwal',
 			'css' => 'css/jadwal',
 			'menus' => fetch_menu($menu)
 		];
@@ -28,6 +28,7 @@ class Jadwal extends MY_Controller
 	public function GetJadwal()
 	{
 		$data = [];
+		$where['t.customer_id'] = $this->session->userdata('id');
 		$where['t.payment_validation_by != '] = NULL;
 		$trx = $this->TransaksiModel->GetTransaction($where)->result();
 

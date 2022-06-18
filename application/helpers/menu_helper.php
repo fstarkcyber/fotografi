@@ -6,6 +6,8 @@ function fetch_menu($data)
 
 	$ci = &get_instance();
 	$menu1 = "";
+
+	$color = array('text-warning', 'text-danger', 'text-success', 'text-info', 'text-muted', 'primary');
 	foreach ($data as $menu) {
 		$menu_active = $ci->session->userdata('menu_active');
 		$sub_menu_active = $ci->session->userdata('sub_menu_active');
@@ -44,7 +46,7 @@ function fetch_menu($data)
 			$menu1 .= '</ul></div>';
 		} else {
 			$menu1 .= '<a class="nav-link ' . $active . '" href="' . site_url($menu->slug) . '">
-						<i class="' . $menu->icon . ' text-primary"></i>
+						<i class="' . $menu->icon . ' ' . $color[array_rand($color)] . '"></i>
 						<span class="nav-link-text">' . $menu->name . '</span>
 					</a>';
 		}
