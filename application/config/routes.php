@@ -59,6 +59,7 @@ $route['_login'] = '_Auth/Login/process';
 
 $route['users'] = 'User';
 $route['users/all'] = 'User/show';
+$route['jadwal'] = 'Jadwal';
 
 $route['transaksi-c'] = 'Transaksi';
 

@@ -102,11 +102,17 @@ class Login extends CI_Controller
 
 	public function _reg_session($row)
 	{
+		if ($row->images == NULL) {
+			$image = 'default.png';
+		} else {
+			$image = $row->images;
+		}
+
 		$data_session = array(
 			'id'               => $row->id,
 			'email'            => $row->email,
 			'name'             => $row->name,
-			'images'             => $row->images,
+			'images'           => $image,
 			'role_id'          => $row->role_id,
 			'role_name'        => $row->role_name,
 			'role_slug'        => $row->slug,

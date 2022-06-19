@@ -4,14 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class UserModel extends CI_Model
 {
 	var $table = 'users';
-	var $column_order = array(null, 'u.name', 'u.email', 'u.role_id');
-	var $column_search = array('u.name', 'u.email', 'r.role_name'); //field yang diizin untuk pencarian 
+	var $column_order = array(null, 'u.name', 'u.email', 'u.hp', 'u.role_id');
+	var $column_search = array('u.name', 'u.email', 'u.hp', 'r.role_name'); //field yang diizin untuk pencarian 
 	var $order = array('u.created_at' => 'desc'); // default order 
 
 	// Datatable
 	private function _get_datatables_query()
 	{
-		$this->db->select('r.name as role_name, u.name, u.email, u.id, u.role_id, u.status, u.images');
+		$this->db->select('r.name as role_name, u.name, u.hp, u.email, u.id, u.role_id, u.status, u.images');
 		$this->db->join('roles as r', 'r.id = u.role_id', 'left');
 		$this->db->from($this->table . ' as u');
 		$i = 0;

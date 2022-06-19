@@ -32,11 +32,11 @@ class Jadwal extends MY_Controller
 		$where['t.payment_validation_by != '] = NULL;
 		$trx = $this->TransaksiModel->GetTransaction($where)->result();
 
-		$photographer = '';
-		$action = '';
-		$status = '';
 
 		foreach ($trx as $tr) {
+			$photographer = '';
+			$action = '';
+			$status = '';
 			$date = $tr->datetime_fix;
 
 			if ($tr->photographer_id == NULL) {
@@ -44,7 +44,7 @@ class Jadwal extends MY_Controller
 				$photographer = '<span class="badge badge-danger">Belum ada</span>';
 				$action = '<a href="#!" class="table-action text-primary btn-take" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-bolt"></i> Take</a>';
 			} else if ($tr->photographer_finish_confirm == NULL) {
-				$photographer = $tr->photographer_name;
+				$photographer = $tr->photographer_name . ' | ' . $tr->photographer_hp;
 				$action = '<a href="#!" class="table-action text-primary btn-finish" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-trophy"></i> Finish</a>';
 				$status = '<span class="badge badge-primary">Sedang Berjalan</span>';
 			} else {

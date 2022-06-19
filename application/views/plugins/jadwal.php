@@ -15,25 +15,25 @@
   		// 	"data-toggle": "modal",
   		// });
 
-  		GetTransaction();
+  		GetJadwal();
 
-  		function GetTransaction() {
+  		function GetJadwal() {
   			$.ajax({
   				type: "GET",
-  				url: base_url + 'Transaksi/GetTransaction',
+  				url: base_url + 'Jadwal/GetJadwal',
   				dataType: "JSON",
   				success: function(data) {
-  					// console.log(data);
   					var html = '';
 
   					$.each(data, function(i, val) {
   						html += '<tr>' +
   							'<td>' + val.booking_code + '</td>' +
   							'<td>' + val.packet_name + '</td>' +
+  							'<td>' + val.name + '</td>' +
   							'<td>' + val.packet_price + '</td>' +
   							'<td>' + val.datetime + '</td>' +
+  							'<td>' + val.photographer_name + '</td>' +
   							'<td>' + val.status + '</td>' +
-  							'<td class="table-actions">' + val.action + '</td>' +
   							'</tr>';
   					});
 
@@ -41,66 +41,6 @@
   				}
   			});
   		}
-
-  		$('#form-payment-validation').submit(function() {
-  			var data = $(this).serialize();
-
-  			$.ajax({
-  				type: "POST",
-  				url: base_url + 'Transaksi/payment_validation',
-  				data: data,
-  				dataType: "JSON",
-  				success: function(response) {
-  					// console.log(response);
-  					notification(response.type, response.message);
-  					$('#form-payment-validation')[0].reset();
-  					$('#modal-payment-validation').modal('hide');
-  					GetTransaction();
-  				}
-  			});
-
-  			return false;
-  		});
-
-  		$('#form-payment-cancel').submit(function() {
-  			var data = $(this).serialize();
-
-  			$.ajax({
-  				type: "POST",
-  				url: base_url + 'Transaksi/payment_cancel',
-  				data: data,
-  				dataType: "JSON",
-  				success: function(response) {
-  					// console.log(response);
-  					notification(response.type, response.message);
-  					$('#form-payment-cancel')[0].reset();
-  					$('#modal-payment-cancel').modal('hide');
-  					GetTransaction();
-  				}
-  			});
-
-  			return false;
-  		});
-
-  		$('#table-body-transaction').on('click', '.btn-validation', function() {
-  			var id = $(this).attr('data-id');
-  			var date = $(this).attr('data-date');
-
-  			// console.log(date);
-  			$('#form-payment-validation [name="id_transaction"]').val(id);
-  			$('#form-payment-validation [name="datetime_fix"]').val(date);
-
-  			$('#modal-payment-validation').modal('show');
-  		});
-
-  		$('#table-body-transaction').on('click', '.btn-cancel-payment', function() {
-  			var id = $(this).attr('data-id');
-
-  			// console.log(date);
-  			$('#form-payment-cancel [name="id_transaction"]').val(id);
-
-  			$('#modal-payment-cancel').modal('show');
-  		});
 
   		var $dtBasic = $("#table-transaction");
 

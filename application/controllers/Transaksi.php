@@ -30,23 +30,27 @@ class Transaksi extends MY_Controller
 		$data = [];
 		$trx = $this->TransaksiModel->GetTransaction()->result();
 
-		$status = '';
-		$action = '';
 
 		foreach ($trx as $tr) {
+			$status = '';
+			$action = '';
 			$date = $tr->datetime;
 
 			if ($tr->payment_date == NULL || $tr->payment_image == NULL) {
 				$status = '<span class="badge badge-danger">Menunggu Pembayaran</span>';
 			} else if ($tr->payment_validation_at == NULL || $tr->payment_validation_by == NULL) {
-				$action .= '<a target="_blank" href="' . base_url('assets/img/transactions/' . $tr->payment_image) . '" class="table-action text-success" title="Lihat Bukti Pembayaran"><i class="fas fa-eye"></i> Bukti Pembayaran</a>';
-				$action .= '<a data-date="' . date('Y-m-d\TH:i', strtotime($tr->datetime)) . '" data-id="' . $tr->id_transaction . '" href="#" class="table-action text-primary btn-validation" title="Validasi Pembayaran"><i class="fas fa-check"></i> Validasi</a>';
+				$action = '
+							<a target="_blank" href="' . base_url('assets/img/transactions/' . $tr->payment_image) . '" class="table-action text-success" title="Lihat Bukti Pembayaran"><i class="fas fa-eye"></i></a>
+							<a data-id="' . $tr->id_transaction . '" href="#" class="table-action text-danger btn-cancel-payment" title="Batal Validasi Pembayaran"><i class="fas fa-ban"></i></a>
+							<a data-date="' . date('Y-m-d\TH:i', strtotime($tr->datetime)) . '" data-id="' . $tr->id_transaction . '" href="#" class="table-action text-primary btn-validation" title="Validasi Pembayaran"><i class="fas fa-check"></i></a>
+							';
 				$status = '<span class="badge badge-warning">Menunggu Validasi</span>';
 			} else {
 				if ($tr->datetime != $tr->datetime_fix) {
 					$date = $tr->datetime_fix;
+					$status = '<span class="badge badge-success">Validasi Berhasil</span><span class="badge badge-danger">Jadwal di ubah</span>';
 				}
-				$status = '<span class="badge badge-success">Validasi Berhasil</span><span class="badge badge-danger">Jadwal di ubah</span>';
+				$status = '<span class="badge badge-success">Validasi Berhasil</span>';
 			}
 
 			$data[] = array(
@@ -105,6 +109,41 @@ class Transaksi extends MY_Controller
 				'type' => 'warning',
 				'title' => 'Gagal !!!',
 				'message' => 'Validasi gagal, silahkan submit ulang !'
+			);
+		}
+
+		echo json_encode($response);
+	}
+
+	public function payment_cancel()
+	{
+		$id_transaction = str_replace("'", "", htmlspecialchars($this->input->post('id_transaction'), ENT_QUOTES));
+
+		$image = $this->db->get_where('transactions', ['id_transaction' => $id_transaction])->row('payment_image');
+		unlink('./assets/img/transactions/' . $image);
+
+
+		$data['payment_image'] = NULL;
+		$data['payment_date'] = NULL;
+		// var_dump($data);
+		// die;
+
+		$act = $this->TransaksiModel->update($data, $id_transaction);
+
+		// echo $this->db->last_query($act);
+		// die;
+
+		if ($act) {
+			$response = array(
+				'type' => 'success',
+				'title' => 'Berhasil !!!',
+				'message' => 'Cancel berhasil !.'
+			);
+		} else {
+			$response = array(
+				'type' => 'warning',
+				'title' => 'Gagal !!!',
+				'message' => 'Cancel gagal, Silahkan submit ulang !'
 			);
 		}
 

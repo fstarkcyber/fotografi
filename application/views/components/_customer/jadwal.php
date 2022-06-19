@@ -17,7 +17,7 @@
 							<th>Nama Customer</th>
 							<th>Packet Price</th>
 							<th>Date & Time</th>
-							<th>Fotografer</th>
+							<th>Fotografer & HP</th>
 							<th>Status</th>
 						</tr>
 					</thead>

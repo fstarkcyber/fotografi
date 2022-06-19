@@ -4,7 +4,7 @@
 		<!-- Brand -->
 		<div class="sidenav-header d-flex align-items-center">
 			<a class="navbar-brand" href="<?= base_url() ?>pages/dashboards/dashboard.html">
-				<img src="<?= base_url() ?>assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+				<img src="<?= base_url() ?>assets/img/brand/logo-caffeine.png" class="navbar-brand-img" alt="...">
 			</a>
 			<div class="ml-auto">
 				<!-- Sidenav toggler -->
@@ -27,9 +27,9 @@
 				<!-- Divider -->
 				<hr class="my-3">
 				<!-- Heading -->
-				<h6 class="navbar-heading p-0 text-muted">Documentation</h6>
+				<!-- <h6 class="navbar-heading p-0 text-muted">Documentation</h6> -->
 				<!-- Navigation -->
-				<ul class="navbar-nav mb-md-3">
+				<!-- <ul class="navbar-nav mb-md-3">
 					<li class="nav-item">
 						<a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html" target="_blank">
 							<i class="ni ni-spaceship"></i>
@@ -54,7 +54,7 @@
 							<span class="nav-link-text">Plugins</span>
 						</a>
 					</li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>

@@ -46,10 +46,11 @@ class Booking extends MY_Controller
 		$where['t.customer_id'] = $this->session->userdata('id');
 		$trx = $this->TransaksiModel->GetTransaction($where)->result();
 
-		$status = '';
-		$action = '';
 
 		foreach ($trx as $tr) {
+			$status = '';
+			$action = '';
+
 			$date = $tr->datetime;
 
 			if ($tr->payment_date == NULL || $tr->payment_image == NULL) {
@@ -60,9 +61,10 @@ class Booking extends MY_Controller
 			} else {
 				if ($tr->datetime != $tr->datetime_fix) {
 					$date = $tr->datetime_fix;
+					$status = '<span class="badge badge-success">Validasi Berhasil</span><span class="badge badge-danger">Jadwal di ubah</span>';
 				}
 
-				$status = '<span class="badge badge-success">Validasi Berhasil</span><span class="badge badge-danger">Jadwal di ubah</span>';
+				$status = '<span class="badge badge-success">Validasi Berhasil</span>';
 			}
 
 			$data[] = array(

@@ -59,3 +59,31 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id="modal-payment-cancel" tabindex="-1" role="dialog" aria-labelledby="modal-payment-cancel" aria-hidden="true">
+	<div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header bg-danger">
+				<h6 class="modal-title text-white" id="modal-title-payment-cancel">Payment Cancel</h6>
+				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form method="POST" enctype="multipart/form-data" id="form-payment-cancel">
+					<input type="hidden" name="id_transaction">
+				</form>
+				<p>Apakah anda yakin ingin cancel pembayaran transaksi ini ?</p>
+			</div>
+
+			<div class="modal-footer">
+				<button type="submit" form="form-payment-cancel" class="btn btn-danger">Yes</button>
+				<button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>

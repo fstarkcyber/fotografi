@@ -12,12 +12,12 @@ class Jadwal extends MY_Controller
 
 	public function index()
 	{
-		$this->session->set_userdata(['menu_active' => 'jadwal-f', 'sub_menu_active' => '']);
+		$this->session->set_userdata(['menu_active' => 'jadwal', 'sub_menu_active' => '']);
 		$menu = $this->MenusModel->getMenu();
 
 		$data = [
-			'content' => 'components/_fotografer/jadwal',
-			'plugin' => 'plugins/_fotografer/jadwal',
+			'content' => 'components/jadwal',
+			'plugin' => 'plugins/jadwal',
 			'css' => 'css/jadwal',
 			'menus' => fetch_menu($menu)
 		];
@@ -41,10 +41,10 @@ class Jadwal extends MY_Controller
 			if ($tr->photographer_id == NULL) {
 				$status = '<span class="badge badge-warning">Menunggu Photographer</span>';
 				$photographer = '<span class="badge badge-danger">Belum ada</span>';
-				$action = '<a href="#!" class="table-action text-primary btn-take" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-bolt"></i> Take</a>';
+				// $action = '<a href="#!" class="table-action text-primary btn-take" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-bolt"></i> Take</a>';
 			} else if ($tr->photographer_finish_confirm == NULL) {
 				$photographer = $tr->photographer_name;
-				$action = '<a href="#!" class="table-action text-primary btn-finish" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-trophy"></i> Finish</a>';
+				// $action = '<a href="#!" class="table-action text-primary btn-finish" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Ambil Jadwal"><i class="fas fa-trophy"></i> Finish</a>';
 				$status = '<span class="badge badge-primary">Sedang Berjalan</span>';
 			} else {
 				$status = '<span class="badge badge-success">Transaksi Selesai</span>';

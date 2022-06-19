@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 06:09 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Waktu pembuatan: 19 Jun 2022 pada 14.14
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 8.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menus`
+-- Struktur dari tabel `menus`
 --
 
 CREATE TABLE `menus` (
@@ -40,7 +40,7 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `menus`
+-- Dumping data untuk tabel `menus`
 --
 
 INSERT INTO `menus` (`id`, `name`, `slug`, `icon`, `parrent_id`, `role_id`, `sequence`, `created_at`, `updated_at`) VALUES
@@ -62,7 +62,7 @@ INSERT INTO `menus` (`id`, `name`, `slug`, `icon`, `parrent_id`, `role_id`, `seq
 -- --------------------------------------------------------
 
 --
--- Table structure for table `packets`
+-- Struktur dari tabel `packets`
 --
 
 CREATE TABLE `packets` (
@@ -77,7 +77,7 @@ CREATE TABLE `packets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `packets`
+-- Dumping data untuk tabel `packets`
 --
 
 INSERT INTO `packets` (`id_packet`, `packet_name`, `packet_duration`, `packet_price`, `packet_description`, `membership`, `created_at`, `updated_at`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `packets` (`id_packet`, `packet_name`, `packet_duration`, `packet_pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `packet_images`
+-- Struktur dari tabel `packet_images`
 --
 
 CREATE TABLE `packet_images` (
@@ -101,7 +101,7 @@ CREATE TABLE `packet_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `packet_images`
+-- Dumping data untuk tabel `packet_images`
 --
 
 INSERT INTO `packet_images` (`id_packet_images`, `packet_id`, `image_name`) VALUES
@@ -117,7 +117,7 @@ INSERT INTO `packet_images` (`id_packet_images`, `packet_id`, `image_name`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Struktur dari tabel `roles`
 --
 
 CREATE TABLE `roles` (
@@ -129,7 +129,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- Dumping data untuk tabel `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
@@ -140,7 +140,7 @@ INSERT INTO `roles` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transactions`
+-- Struktur dari tabel `transactions`
 --
 
 CREATE TABLE `transactions` (
@@ -163,17 +163,17 @@ CREATE TABLE `transactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `transactions`
+-- Dumping data untuk tabel `transactions`
 --
 
 INSERT INTO `transactions` (`id_transaction`, `packet_id`, `customer_id`, `booking_code`, `datetime`, `datetime_fix`, `note`, `payment_image`, `payment_date`, `payment_validation_at`, `payment_validation_by`, `photographer_id`, `photographer_take_booking`, `photographer_finish_confirm`, `created_at`, `updated_at`) VALUES
-(3, 1, 85, '20220616115750', '2022-06-17 19:00:00', '2022-06-17 20:00:00', 'Halo kak', '20220616115750.jpg', '2022-06-16 13:59:37', '2022-06-17 12:34:04', 84, 86, '2022-06-18 17:42:56', NULL, '2022-06-16 16:57:50', '2022-06-18 22:42:56'),
-(4, 1, 85, '20220618173412', '2022-06-19 00:34:00', '2022-06-19 00:34:00', '', '20220618173412.jpg', '2022-06-18 17:34:23', '2022-06-18 17:34:43', 84, NULL, NULL, NULL, '2022-06-18 22:34:12', '2022-06-18 22:34:43');
+(3, 1, 2, '20220616115750', '2022-06-17 19:00:00', '2022-06-17 20:00:00', 'Halo kak', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-16 16:57:50', '2022-06-19 18:31:46'),
+(4, 1, 2, '20220618173412', '2022-06-19 00:34:00', '2022-06-19 00:34:00', '', '20220618173412.jpg', '2022-06-18 17:34:23', NULL, NULL, NULL, NULL, NULL, '2022-06-18 22:34:12', '2022-06-19 18:23:04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -182,6 +182,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `status` bigint(20) DEFAULT 0,
@@ -191,47 +192,47 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role_id`, `status`, `images`, `created_at`, `updated_at`) VALUES
-(84, 'Ahmad Fatoni', 'admin@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 1, 1, NULL, '2022-06-08 08:42:08', NULL),
-(85, 'Customer', 'customer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 3, 1, NULL, '2022-06-08 08:42:08', NULL),
-(86, 'Fotografer', 'fotografer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, 2, 1, NULL, '2022-06-08 08:42:08', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `hp`, `remember_token`, `role_id`, `status`, `images`, `created_at`, `updated_at`) VALUES
+(1, 'Ahmad Fatoni', 'admin@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', '089676490971', NULL, 1, 1, '8d7cce30957206cd83a26b986052f5c4.png', '2022-06-08 08:42:08', NULL),
+(2, 'Customer', 'customer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, NULL, 3, 1, NULL, '2022-06-08 08:42:08', NULL),
+(3, 'Melani', 'fotografer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', '0881912738123', NULL, 2, 1, '404bb8b63c9f2637a44bf01e9b5c11e6.jpg', '2022-06-08 08:42:08', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `menus`
+-- Indeks untuk tabel `menus`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role_menus` (`role_id`);
 
 --
--- Indexes for table `packets`
+-- Indeks untuk tabel `packets`
 --
 ALTER TABLE `packets`
   ADD PRIMARY KEY (`id_packet`);
 
 --
--- Indexes for table `packet_images`
+-- Indeks untuk tabel `packet_images`
 --
 ALTER TABLE `packet_images`
   ADD PRIMARY KEY (`id_packet_images`),
   ADD KEY `id_packet_fk` (`packet_id`);
 
 --
--- Indexes for table `roles`
+-- Indeks untuk tabel `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`slug`);
 
 --
--- Indexes for table `transactions`
+-- Indeks untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
   ADD PRIMARY KEY (`id_transaction`),
@@ -239,7 +240,7 @@ ALTER TABLE `transactions`
   ADD KEY `trx_packet_fk` (`packet_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -247,70 +248,70 @@ ALTER TABLE `users`
   ADD KEY `roles_users` (`role_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `menus`
+-- AUTO_INCREMENT untuk tabel `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `packets`
+-- AUTO_INCREMENT untuk tabel `packets`
 --
 ALTER TABLE `packets`
   MODIFY `id_packet` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `packet_images`
+-- AUTO_INCREMENT untuk tabel `packet_images`
 --
 ALTER TABLE `packet_images`
   MODIFY `id_packet_images` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT untuk tabel `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `transactions`
+-- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
   MODIFY `id_transaction` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `menus`
+-- Ketidakleluasaan untuk tabel `menus`
 --
 ALTER TABLE `menus`
   ADD CONSTRAINT `role_menus` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `packet_images`
+-- Ketidakleluasaan untuk tabel `packet_images`
 --
 ALTER TABLE `packet_images`
   ADD CONSTRAINT `id_packet_fk` FOREIGN KEY (`packet_id`) REFERENCES `packets` (`id_packet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `transactions`
+-- Ketidakleluasaan untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
   ADD CONSTRAINT `trx_packet_fk` FOREIGN KEY (`packet_id`) REFERENCES `packets` (`id_packet`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `trx_user_id_fk` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `users`
+-- Ketidakleluasaan untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `roles_users` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
