@@ -49,8 +49,9 @@ class Transaksi extends MY_Controller
 				if ($tr->datetime != $tr->datetime_fix) {
 					$date = $tr->datetime_fix;
 					$status = '<span class="badge badge-success">Validasi Berhasil</span><span class="badge badge-danger">Jadwal di ubah</span>';
+				} else {
+					$status = '<span class="badge badge-success">Validasi Berhasil</span>';
 				}
-				$status = '<span class="badge badge-success">Validasi Berhasil</span>';
 			}
 
 			$data[] = array(
