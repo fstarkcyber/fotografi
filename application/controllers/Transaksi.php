@@ -58,7 +58,7 @@ class Transaksi extends MY_Controller
 				'booking_code' => $tr->booking_code,
 				'created_at' => $tr->created_at,
 				'customer_id' => $tr->customer_id,
-				'datetime' => date('d-m-Y H:i:s', strtotime($tr->datetime)),
+				'datetime' => date('d-m-Y H:i:s', strtotime($date)),
 				'email' => $tr->email,
 				'id_transaction' => $tr->id_transaction,
 				'name' => $tr->name,
