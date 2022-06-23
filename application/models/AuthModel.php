@@ -17,6 +17,11 @@ class AuthModel extends CI_Model
 	{
 		return $this->db->update('users', $data, ['id' => $id]);
 	}
+
+	function add($data)
+	{
+		return $this->db->insert('users', $data);
+	}
 }
 	
 	/* End of file AuthModel.php */

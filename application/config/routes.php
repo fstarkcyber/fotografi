@@ -57,6 +57,9 @@ $route['logout'] = '_Auth/Login/logout';
 $route['login'] = '_Auth/Login';
 $route['_login'] = '_Auth/Login/process';
 
+$route['register'] = '_Auth/Register';
+$route['_register'] = '_Auth/Register/process';
+
 $route['users'] = 'User';
 $route['users/all'] = 'User/show';
 $route['jadwal'] = 'Jadwal';

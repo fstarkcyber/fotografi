@@ -25,13 +25,29 @@
 					<div class="text-center text-muted mb-4">
 						<small>Or sign in with credentials</small>
 					</div>
-					<form role="form" id="form-login" method="POST">
+					<form role="form" id="form-register" method="POST">
 						<div class="form-group mb-3">
 							<div class="input-group input-group-merge input-group-alternative">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 								</div>
 								<input class="form-control" placeholder="Email" type="email" name="email">
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<div class="input-group input-group-merge input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+								</div>
+								<input class="form-control" placeholder="Nama" type="text" name="name">
+							</div>
+						</div>
+						<div class="form-group mb-3">
+							<div class="input-group input-group-merge input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+								</div>
+								<input class="form-control" placeholder="HP" type="number" name="hp">
 							</div>
 						</div>
 						<div class="form-group">
@@ -42,24 +58,25 @@
 								<input class="form-control" placeholder="Password" type="password" name="password">
 							</div>
 						</div>
-						<div class="custom-control custom-control-alternative custom-checkbox">
-							<input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-							<label class="custom-control-label" for=" customCheckLogin">
-								<span class="text-muted">Remember me</span>
-							</label>
+
+						<div class="form-group">
+							<div class="input-group input-group-merge input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+								</div>
+								<input class="form-control" placeholder="Password Confirmation" type="password" name="password_confirm">
+							</div>
 						</div>
+
 						<div class="text-center">
-							<button type="submit" class="btn btn-primary my-4">Sign in</button>
+							<button type="submit" class="btn btn-primary my-4">Register</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="row mt-3">
 				<div class="col-6">
-					<a href="#" class="text-light"><small>Forgot password?</small></a>
-				</div>
-				<div class="col-6 text-right">
-					<a href="<?= site_url('register') ?>" class="text-light"><small>Create new account</small></a>
+					<a href="#" class="text-light"><small>Sudah punya akun ?</small></a>
 				</div>
 			</div>
 		</div>
