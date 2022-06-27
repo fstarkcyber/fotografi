@@ -63,6 +63,26 @@
   			return false;
   		});
 
+  		$('#form-finish-confirm').submit(function() {
+  			var data = $(this).serialize();
+
+  			$.ajax({
+  				type: "POST",
+  				url: base_url + '_Fotografer/Jadwal/FinishConfirm',
+  				data: data,
+  				dataType: "JSON",
+  				success: function(response) {
+  					// console.log(response);
+  					notification(response.type, response.message);
+  					$('#modal-finish-confirm').modal('hide');
+  					$('#form-finish-confirm')[0].reset();
+  					GetJadwal();
+  				}
+  			});
+
+  			return false;
+  		});
+
   		$('#table-body-transaction').on('click', '.btn-take', function() {
   			var id = $(this).attr('data-id');
   			var date = $(this).attr('data-date');
@@ -71,6 +91,14 @@
   			$('.datetime').html(date);
 
   			$('#modal-take-timetable').modal('show');
+  		});
+
+  		$('#table-body-transaction').on('click', '.btn-finish', function() {
+  			var id = $(this).attr('data-id');
+
+  			$('[name="id_transaction"]').val(id);
+
+  			$('#modal-finish-confirm').modal('show');
   		});
 
   		var $dtBasic = $("#table-transaction");

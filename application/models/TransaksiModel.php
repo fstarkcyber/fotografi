@@ -19,6 +19,27 @@ class TransaksiModel extends CI_Model
 		return $this->db->get();
 	}
 
+	function GetTransactionValue($month)
+	{
+		$this->db->select('SUM(p.packet_price) as trx_value');
+		$this->db->join('packets as p', 't.packet_id = p.id_packet', 'LEFT');
+		$this->db->where('MONTHNAME(DATE(t.created_at))', $month);
+		$this->db->where('t.payment_validation_at != ', NULL);
+		$this->db->group_by('MONTHNAME(DATE(t.created_at))');
+		$this->db->from($this->table . ' as t');
+		return $this->db->get();
+	}
+
+	function GetTotalOrder($month)
+	{
+		$this->db->select('count(*) as total_order');
+		$this->db->where('MONTHNAME(DATE(t.created_at))', $month);
+		$this->db->where('t.payment_validation_at != ', NULL);
+		$this->db->group_by('MONTHNAME(DATE(t.created_at))');
+		$this->db->from($this->table . ' as t');
+		return $this->db->get();
+	}
+
 	function add($data)
 	{
 		return $this->db->insert($this->table, $data);

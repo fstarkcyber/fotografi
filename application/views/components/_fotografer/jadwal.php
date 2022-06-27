@@ -58,3 +58,33 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id="modal-finish-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-finish-confirm" aria-hidden="true">
+	<div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header bg-primary">
+				<h6 class="modal-title text-white" id="modal-title-finish-confirm">Ambil Jadwal</h6>
+				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<h4 class="mt-3">Apakah anda yakin ingin konfirmasi transaksi selesai ?</h4>
+
+				<form method="POST" enctype="multipart/form-data" id="form-finish-confirm">
+					<input type="hidden" name="id_transaction">
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+				<button type="submit" form="form-finish-confirm" class="btn btn-primary">Confirm</button>
+				<button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>

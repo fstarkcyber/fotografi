@@ -14,7 +14,7 @@ $this->load->view('partials/head');
 		?>
 	</div>
 
-	<!-- Footer -->
+	<!-- Footer
 	<footer class="py-5" id="footer-main">
 		<div class="container">
 			<div class="row align-items-center justify-content-xl-between">
@@ -41,7 +41,7 @@ $this->load->view('partials/head');
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 
 	<?php
 	$this->load->view('partials/plugins');

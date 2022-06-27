@@ -111,4 +111,34 @@ class Jadwal extends MY_Controller
 
 		echo json_encode($response);
 	}
+
+	public function FinishConfirm()
+	{
+		$id_transaction = str_replace("'", "", htmlspecialchars($this->input->post('id_transaction'), ENT_QUOTES));
+		$data['photographer_finish_confirm'] = date('Y-m-d H:i:s');
+
+		// var_dump($data);
+		// die;
+
+		$act = $this->TransaksiModel->update($data, $id_transaction);
+
+		// echo $this->db->last_query($act);
+		// die;
+
+		if ($act) {
+			$response = array(
+				'type' => 'success',
+				'title' => 'Berhasil !!!',
+				'message' => 'Konfirmasi berhasil, transaksi selesai !.'
+			);
+		} else {
+			$response = array(
+				'type' => 'warning',
+				'title' => 'Gagal !!!',
+				'message' => 'Konfirmasi gagal, silahkan submit ulang !'
+			);
+		}
+
+		echo json_encode($response);
+	}
 }

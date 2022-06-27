@@ -14,6 +14,7 @@
 						<tr>
 							<th>Booking Code</th>
 							<th>Packet Name</th>
+							<th>Costumer Name</th>
 							<th>Packet Price</th>
 							<th>Date & Time</th>
 							<th>Status</th>

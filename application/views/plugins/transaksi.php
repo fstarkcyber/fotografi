@@ -30,6 +30,7 @@
   						html += '<tr>' +
   							'<td>' + val.booking_code + '</td>' +
   							'<td>' + val.packet_name + '</td>' +
+  							'<td>' + val.name + '</td>' +
   							'<td>' + val.packet_price + '</td>' +
   							'<td>' + val.datetime + '</td>' +
   							'<td>' + val.status + '</td>' +
