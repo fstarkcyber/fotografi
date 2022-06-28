@@ -28,8 +28,13 @@ class Dashboard extends MY_Controller
 
 	public function count()
 	{
+		$this->load->model('UserModel');
 		$data['transactionValue'] = $this->transactionValue();
 		$data['totalOrder'] = $this->totalOrder();
+
+		$user = $this->UserModel->countUser()->row();
+		$data['total_customer'] = $user->total_customer;
+		$data['total_fotografer'] = $user->total_fotografer;
 
 		echo json_encode($data);
 	}

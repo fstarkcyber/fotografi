@@ -111,6 +111,15 @@ class UserModel extends CI_Model
 	{
 		return $this->db->get('roles');
 	}
+
+	function countUser()
+	{
+		$this->db->select('SUM(IF(role_id=1,1,0)) AS total_admin');
+		$this->db->select('SUM(IF(role_id=2,1,0)) AS total_fotografer');
+		$this->db->select('SUM(IF(role_id=3,1,0)) AS total_customer');
+		$this->db->from($this->table);
+		return $this->db->get();
+	}
 }
 
 /* End of file ProductModel.php */

@@ -40,7 +40,9 @@
 					notification(response.type, response.message);
 					$('#form-add-booking')[0].reset();
 
-					window.location.href = "";
+					setTimeout(() => {
+						window.location.href = base_url + 'transaksi-c';
+					}, 1000);
 				}
 			});
 

@@ -13,6 +13,8 @@
                     transactionValueChart(response.transactionValue);
                     totalOrderChart(response.totalOrder);
 
+                    $('#total-customer').html(response.total_customer);
+                    $('#total-fotografer').html(response.total_fotografer);
                     console.log(response);
                 }
             });

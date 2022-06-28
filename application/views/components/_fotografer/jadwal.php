@@ -65,7 +65,7 @@
 		<div class="modal-content">
 
 			<div class="modal-header bg-primary">
-				<h6 class="modal-title text-white" id="modal-title-finish-confirm">Ambil Jadwal</h6>
+				<h6 class="modal-title text-white" id="modal-title-finish-confirm">Konfirmasi Selesai</h6>
 				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
