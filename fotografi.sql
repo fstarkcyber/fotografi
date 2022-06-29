@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Jun 2022 pada 14.14
+-- Waktu pembuatan: 29 Jun 2022 pada 16.47
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 8.0.15
 
@@ -57,7 +57,9 @@ INSERT INTO `menus` (`id`, `name`, `slug`, `icon`, `parrent_id`, `role_id`, `seq
 (11, 'Daftar Jadwal', 'jadwal', 'ni ni-calendar-grid-58', 0, 1, 4, '2022-06-09 17:58:57', '2022-06-16 15:20:51'),
 (12, 'Dashboard', 'dashboard', 'ni ni-tv-2', 0, 2, 1, '2022-06-09 17:58:57', '2022-06-09 18:03:41'),
 (13, 'Daftar Paket', 'paket-f', 'ni ni-bag-17', 0, 2, 2, '2022-06-09 17:58:57', '2022-06-09 18:03:41'),
-(14, 'Jadwal', 'jadwal-f', 'ni ni-calendar-grid-58', 0, 2, 5, '2022-06-09 17:58:57', '2022-06-16 14:15:14');
+(14, 'Jadwal', 'jadwal-f', 'ni ni-calendar-grid-58', 0, 2, 5, '2022-06-09 17:58:57', '2022-06-16 14:15:14'),
+(15, 'Laporan', 'laporan', 'ni ni-book-bookmark', 0, 1, 5, '2022-06-09 17:58:57', '2022-06-29 19:42:51'),
+(16, 'Hasil Foto', 'hasil-foto-f', 'ni ni-calendar-grid-58', 0, 2, 6, '2022-06-09 17:58:57', '2022-06-16 14:15:14');
 
 -- --------------------------------------------------------
 
@@ -167,8 +169,30 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id_transaction`, `packet_id`, `customer_id`, `booking_code`, `datetime`, `datetime_fix`, `note`, `payment_image`, `payment_date`, `payment_validation_at`, `payment_validation_by`, `photographer_id`, `photographer_take_booking`, `photographer_finish_confirm`, `created_at`, `updated_at`) VALUES
-(3, 1, 2, '20220616115750', '2022-06-17 19:00:00', '2022-06-17 20:00:00', 'Halo kak', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-16 16:57:50', '2022-06-19 18:31:46'),
-(4, 1, 2, '20220618173412', '2022-06-19 00:34:00', '2022-06-19 00:34:00', '', '20220618173412.jpg', '2022-06-18 17:34:23', NULL, NULL, NULL, NULL, NULL, '2022-06-18 22:34:12', '2022-06-19 18:23:04');
+(12, 1, 8, '20220628150940', '2022-06-30 08:00:00', '2022-06-30 09:00:00', 'mohon konfirmasi segera', '20220628150940.png', '2022-06-28 15:10:02', '2022-06-28 15:10:48', 1, 3, '2022-06-28 15:12:26', '2022-06-29 12:04:21', '2022-06-28 20:09:40', '2022-06-29 17:04:21');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaction_images`
+--
+
+CREATE TABLE `transaction_images` (
+  `id_transaction_image` bigint(20) UNSIGNED NOT NULL,
+  `transaction_id` bigint(20) UNSIGNED NOT NULL,
+  `image_name` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `transaction_images`
+--
+
+INSERT INTO `transaction_images` (`id_transaction_image`, `transaction_id`, `image_name`) VALUES
+(6, 12, 'Legok_Printing1.png'),
+(7, 12, '2.png'),
+(8, 12, '1.png'),
+(9, 12, 'awan.png'),
+(10, 12, 'tamara.png');
 
 -- --------------------------------------------------------
 
@@ -197,8 +221,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `hp`, `remember_token`, `role_id`, `status`, `images`, `created_at`, `updated_at`) VALUES
 (1, 'Ahmad Fatoni', 'admin@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', '089676490971', NULL, 1, 1, '8d7cce30957206cd83a26b986052f5c4.png', '2022-06-08 08:42:08', NULL),
-(2, 'Customer', 'customer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', NULL, NULL, 3, 1, NULL, '2022-06-08 08:42:08', NULL),
-(3, 'Melani', 'fotografer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', '0881912738123', NULL, 2, 1, '404bb8b63c9f2637a44bf01e9b5c11e6.jpg', '2022-06-08 08:42:08', NULL);
+(3, 'Melani', 'fotografer@mindotek.com', NULL, '$2y$10$UFcHvhQLBZxdLT69jXnc3uQ94yDw1EiD4zA7/o5.ZTS4UMFPtlsqW', '0881912738123', NULL, 2, 1, '404bb8b63c9f2637a44bf01e9b5c11e6.jpg', '2022-06-08 08:42:08', NULL),
+(8, 'Ilham Taufik', 'customer@mindotek.com', NULL, '$2y$10$X4d6ZFlIn7kV3NVcLffGd.lxCLVfuB5UE7KVB0iofYSNW3ZJ7IMRy', '08815925920', NULL, 3, 1, '98a17bdf0919701abfd1d236d1b1374a.png', '2022-06-28 13:06:58', NULL);
 
 --
 -- Indexes for dumped tables
@@ -240,6 +264,13 @@ ALTER TABLE `transactions`
   ADD KEY `trx_packet_fk` (`packet_id`);
 
 --
+-- Indeks untuk tabel `transaction_images`
+--
+ALTER TABLE `transaction_images`
+  ADD PRIMARY KEY (`id_transaction_image`),
+  ADD KEY `images_transaction_id_fk` (`transaction_id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -255,7 +286,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `packets`
@@ -279,13 +310,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id_transaction` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_transaction` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaction_images`
+--
+ALTER TABLE `transaction_images`
+  MODIFY `id_transaction_image` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -309,6 +346,12 @@ ALTER TABLE `packet_images`
 ALTER TABLE `transactions`
   ADD CONSTRAINT `trx_packet_fk` FOREIGN KEY (`packet_id`) REFERENCES `packets` (`id_packet`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `trx_user_id_fk` FOREIGN KEY (`customer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `transaction_images`
+--
+ALTER TABLE `transaction_images`
+  ADD CONSTRAINT `images_transaction_id_fk` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id_transaction`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `users`

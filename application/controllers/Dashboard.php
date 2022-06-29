@@ -42,7 +42,7 @@ class Dashboard extends MY_Controller
 
 		$images = $this->TransaksiModel->GetImages();
 		if (!empty($images)) {
-			$data['images_gallery'] = $images;
+			$data['images_gallery'] = $images->result();
 		} else {
 			$data['images_gallery'] = NULL;
 		}
