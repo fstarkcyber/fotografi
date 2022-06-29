@@ -39,7 +39,8 @@ class Hasil extends MY_Controller
 			$date = $tr->datetime_fix;
 
 			$check_images = $this->db->get_where('transaction_images', ['transaction_id' => $tr->id_transaction]);
-			if (empty($check_images)) {
+
+			if ($check_images->num_rows() == 0) {
 				$action = '<a href="#!" class="table-action text-primary btn-upload" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Upload Hasil"><i class="ni ni-send"></i> Upload</a>';
 			}
 
