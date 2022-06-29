@@ -39,7 +39,13 @@ class Dashboard extends MY_Controller
 		$data['total_fotografer'] = $user->total_fotografer;
 		$data['total_transaksi'] = $this->TransaksiModel->GetTransaction()->num_rows();
 		$data['total_booking'] = $this->TransaksiModel->GetTransaction()->num_rows();
-		$data['images_gallery'] = $this->TransaksiModel->GetImages()->result();
+
+		$images = $this->TransaksiModel->GetImages();
+		if (!empty($images)) {
+			$data['images_gallery'] = $images;
+		} else {
+			$data['images_gallery'] = NULL;
+		}
 
 		echo json_encode($data);
 	}
