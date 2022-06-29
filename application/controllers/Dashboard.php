@@ -20,6 +20,7 @@ class Dashboard extends MY_Controller
 		$data = [
 			'content' => 'components/dashboard',
 			'plugin' => 'plugins/dashboard',
+			'css' => 'css/dashboard',
 			'menus' => fetch_menu($menu)
 		];
 
@@ -29,12 +30,16 @@ class Dashboard extends MY_Controller
 	public function count()
 	{
 		$this->load->model('UserModel');
+		$user = $this->UserModel->countUser()->row();
+		$where['t.payment_validation_at != '] = NULL;
+
 		$data['transactionValue'] = $this->transactionValue();
 		$data['totalOrder'] = $this->totalOrder();
-
-		$user = $this->UserModel->countUser()->row();
 		$data['total_customer'] = $user->total_customer;
 		$data['total_fotografer'] = $user->total_fotografer;
+		$data['total_transaksi'] = $this->TransaksiModel->GetTransaction()->num_rows();
+		$data['total_booking'] = $this->TransaksiModel->GetTransaction()->num_rows();
+		$data['images_gallery'] = $this->TransaksiModel->GetImages()->result();
 
 		echo json_encode($data);
 	}

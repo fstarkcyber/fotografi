@@ -77,3 +77,4 @@ $route['jadwal-c'] = '_Customer/Jadwal';
 
 $route['paket-f'] = '_Fotografer/Paket';
 $route['jadwal-f'] = '_Fotografer/Jadwal';
+$route['hasil-foto-f'] = '_Fotografer/Hasil';

@@ -77,6 +77,20 @@ class UserModel extends CI_Model
 		return $this->db->get();
 	}
 
+	function getAllFotografer($where = null)
+	{
+		$this->db->select('u.*, r.name as role_name, r.slug as role_slug');
+		$this->db->join('roles as r', 'r.id = u.role_id', 'LEFT');
+		$this->db->order_by('name', 'asc');
+		// $this->db->group_by('p.id');
+		$this->db->where('u.role_id', 2);
+		if ($where != null) {
+			$this->db->where($where);
+		}
+		$this->db->from($this->table . ' as u');
+		return $this->db->get();
+	}
+
 	function getById($id)
 	{
 		return $this->db->where('id', $id)->get($this->table);

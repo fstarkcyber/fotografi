@@ -1,3 +1,5 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
 <script>
     $(document).ready(function() {
 
@@ -15,6 +17,34 @@
 
                     $('#total-customer').html(response.total_customer);
                     $('#total-fotografer').html(response.total_fotografer);
+                    $('#total-transaksi').html(response.total_transaksi);
+                    $('#total-booking').html(response.total_booking);
+
+                    if (response.images_gallery.length > 0) {
+                        var images = '';
+                        $.each(response.images_gallery, function(i, v) {
+                            images += '<div class="col-lg-3 col-md-4 col-xs-6 thumb">' +
+                                '    <a href="' + base_url + 'assets/img/galeri/' + v.image_name + '" class="fancybox" rel="ligthbox">' +
+                                '        <img src="' + base_url + 'assets/img/galeri/' + v.image_name + '" class="zoom img-fluid " alt="">' +
+                                '    </a>' +
+                                '</div>';
+                        });
+
+                        // $(style).appendTo('head');
+                        $('#display-gallery').html(images);
+
+                        $(".fancybox").fancybox({
+                            openEffect: "none",
+                            closeEffect: "none"
+                        });
+
+                        $(".zoom").hover(function() {
+                            $(this).addClass('transition');
+                        }, function() {
+                            $(this).removeClass('transition');
+                        });
+                    }
+
                     console.log(response);
                 }
             });

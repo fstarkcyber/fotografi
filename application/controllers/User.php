@@ -85,6 +85,14 @@ class User extends MY_Controller
 		echo json_encode($output);
 	}
 
+	public function GetAllFotografer()
+	{
+		$data = $this->UserModel->GetAllFotografer();
+		// echo $this->db->last_query($data);
+		// die;
+		echo json_encode($data->result());
+	}
+
 	public function GetUserById($id)
 	{
 		$data = $this->UserModel->getById(str_replace("'", "", htmlspecialchars($id, ENT_QUOTES)))->row();

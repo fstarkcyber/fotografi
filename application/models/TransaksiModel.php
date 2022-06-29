@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class TransaksiModel extends CI_Model
 {
 	var $table = 'transactions';
+	var $table_images = 'transaction_images';
 
 	function GetTransaction($where = null)
 	{
@@ -30,6 +31,11 @@ class TransaksiModel extends CI_Model
 		return $this->db->get();
 	}
 
+	function GetImages()
+	{
+		return $this->db->get($this->table_images);
+	}
+
 	function GetTotalOrder($month)
 	{
 		$this->db->select('count(*) as total_order');
@@ -43,6 +49,24 @@ class TransaksiModel extends CI_Model
 	function add($data)
 	{
 		return $this->db->insert($this->table, $data);
+	}
+
+	function addImages($id, $image)
+	{
+		$this->db->trans_start();
+		$result = array();
+
+		foreach ($image as $i => $value) {
+			$result[] = array(
+				'transaction_id' => $id,
+				'image_name' => $value['image_name'],
+			);
+		}
+
+		$this->db->insert_batch($this->table_images, $result);
+		$this->db->trans_complete();
+
+		return true;
 	}
 
 	function update($data, $id)
