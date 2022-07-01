@@ -28,32 +28,3 @@
 		</div>
 	</div>
 </div>
-
-<div class="modal fade" id="modal-take-timetable" tabindex="-1" role="dialog" aria-labelledby="modal-take-timetable" aria-hidden="true">
-	<div class="modal-dialog modal- modal-dialog-centered modal-md" role="document">
-		<div class="modal-content">
-
-			<div class="modal-header bg-primary">
-				<h6 class="modal-title text-white" id="modal-title-take-timetable">Ambil Jadwal</h6>
-				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-
-			<div class="modal-body">
-				<h4 class="mt-3">Apakah anda yakin ingin ambil jadwal pada <span class="datetime"></span> ini ?</h4>
-
-				<form method="POST" enctype="multipart/form-data" id="form-take-timetable">
-					<input type="hidden" name="id_transaction">
-				</form>
-
-			</div>
-
-			<div class="modal-footer">
-				<button type="submit" form="form-take-timetable" class="btn btn-primary">Confirm</button>
-				<button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
-			</div>
-
-		</div>
-	</div>
-</div>
