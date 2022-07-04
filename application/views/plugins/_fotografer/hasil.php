@@ -41,6 +41,7 @@
   				}
   			});
   		}
+
   		$('#form-upload-hasil').submit(function() {
   			var data = new FormData(this);
   			$.ajax({
@@ -64,12 +65,42 @@
   			return false;
   		});
 
+  		$('#form-delete-hasil').submit(function() {
+  			var data = new FormData(this);
+  			$.ajax({
+  				url: base_url + '_Fotografer/Hasil/delete',
+  				type: 'POST',
+  				data: data,
+  				contentType: false,
+  				cache: false,
+  				processData: false,
+  				dataType: 'JSON',
+  				success: function(response) {
+  					notification(response.type, response.message);
+
+  					$('#modal-delete-hasil').modal('hide');
+  					$('#form-delete-hasil')[0].reset();
+
+  					GetJadwal();
+  				}
+  			});
+
+  			return false;
+  		});
+
   		$('#table-body-transaction').on('click', '.btn-upload', function() {
   			var id = $(this).attr('data-id');
 
   			$('[name="id_transaction"]').val(id);
 
   			$('#modal-upload-hasil').modal('show');
+  		});
+
+  		$('#table-body-transaction').on('click', '.btn-hapus-hasil', function() {
+  			var id = $(this).attr('data-id');
+  			$('[name="transaction_id"]').val(id);
+
+  			$('#modal-delete-hasil').modal('show');
   		});
 
   		var $dtBasic = $("#table-transaction");

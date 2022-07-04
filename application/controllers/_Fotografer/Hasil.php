@@ -31,7 +31,6 @@ class Hasil extends MY_Controller
 		$where['t.photographer_finish_confirm != '] = NULL;
 		$trx = $this->TransaksiModel->GetTransaction($where)->result();
 
-
 		foreach ($trx as $tr) {
 			$photographer = '';
 			$action = '';
@@ -41,7 +40,9 @@ class Hasil extends MY_Controller
 			$check_images = $this->db->get_where('transaction_images', ['transaction_id' => $tr->id_transaction]);
 
 			if ($check_images->num_rows() == 0) {
-				$action = '<a href="#!" class="table-action text-primary btn-upload" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Upload Hasil"><i class="ni ni-send"></i> Upload</a>';
+				$action = '<a href="#!" class="btn btn-sm btn-primary table-action text-white btn-upload" data-id="' . $tr->id_transaction . '"  data-date="' . date('d-m-Y H:i:s', strtotime($date)) . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Upload Hasil">Upload</a>';
+			} else {
+				$action = '<a href="#!" class="btn btn-sm  btn-danger table-action text-white btn-hapus-hasil" data-id="' . $tr->id_transaction . '" >Hapus Foto</a>';
 			}
 
 			$data[] = array(
@@ -132,6 +133,36 @@ class Hasil extends MY_Controller
 				'type' => 'warning',
 				'title' => 'Gagal !!!',
 				'message' => 'hasil foto gagal ditambahkan, periksa size image maksimal 2MB !'
+			);
+		}
+
+		echo json_encode($response);
+	}
+
+	public function delete()
+	{
+		$id_transaction = str_replace("'", "", htmlspecialchars($this->input->post('transaction_id'), ENT_QUOTES));
+
+		$data = $this->db->get('transaction_images', ['transaction_id' => $id_transaction]);
+		if ($data->num_rows() > 0) {
+			foreach ($data->result() as $dt) {
+				unlink('./assets/img/galeri/' . $dt->image_name);
+			}
+		}
+
+		$act = $this->TransaksiModel->deleteGaleri($id_transaction);
+
+		if ($act) {
+			$response = array(
+				'type' => 'success',
+				'title' => 'Berhasil !!!',
+				'message' => 'Data  berhasil dihapus.'
+			);
+		} else {
+			$response = array(
+				'type' => 'warning',
+				'title' => 'Gagal !!!',
+				'message' => 'Data paket gagal dihapus !'
 			);
 		}
 

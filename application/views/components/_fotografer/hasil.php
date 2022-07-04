@@ -127,3 +127,27 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="modal-delete-hasil" tabindex="-1" role="dialog" aria-labelledby="modal-delete-hasil" aria-hidden="true">
+	<div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<h6 class="modal-title text-white" id="modal-title-delete-hasil">Modal Delete Hasil</h6>
+				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form method="POST" enctype="multipart/form-data" id="form-delete-hasil">
+					<input type="hidden" name="transaction_id">
+					<p>Apakah anda yakin ingin menghapus hasil foto ini ?</p>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" form="form-delete-hasil" class="btn btn-danger">Hapus</button>
+				<button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -78,6 +78,11 @@ class TransaksiModel extends CI_Model
 	{
 		return $this->db->delete($this->table, ['id_transaction' => $id]);
 	}
+
+	function deleteGaleri($id)
+	{
+		return $this->db->delete('transaction_images', ['transaction_id' => $id]);
+	}
 }
 	
 	/* End of file AuthModel.php */
