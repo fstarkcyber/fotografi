@@ -6,6 +6,7 @@
   <script src="<?= site_url() ?>assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
   <script src="<?= site_url() ?>assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
   <script src="<?= site_url() ?>assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+  <script src="https://apps.sistemit.com/tutorial/html2canvas/html2canvas.js"></script>
   <script>
   	$(document).ready(function() {
   		// $('.btn-neutral').show();
@@ -16,6 +17,8 @@
   		// });
 
   		GetTransaction();
+  		var container = $('#image-container');
+  		var getCanvas;
 
   		function GetTransaction() {
   			$.ajax({
@@ -96,6 +99,50 @@
   			$('#modal-payment-confirm').modal('show');
   		});
 
+  		$('#table-body-transaction').on('click', '.btn-preview', function() {
+  			var id = $(this).attr('data-id');
+  			var booking_code = $(this).attr('data-booking');
+  			var packet_price = $(this).attr('data-price');
+  			var packet_name = $(this).attr('data-packet-name');
+  			var packet_duration = $(this).attr('data-packet-duration');
+  			var name = $(this).attr('data-name');
+  			var email = $(this).attr('data-email');
+  			var note = $(this).attr('data-note');
+  			var created_at = $(this).attr('data-created-at');
+
+  			// console.log(name);
+
+  			$('.name').html(name);
+  			$('.email').html(email);
+  			$('.booking-code').html(booking_code);
+  			$('.note').html(note);
+  			$('.created_at').html(created_at);
+  			$('.packet_name').html(packet_name);
+  			$('.packet_price').html(packet_price);
+  			$('.packet_duration').html(packet_duration);
+
+  			$('#modal-preview-invoice').modal('show');
+  		});
+
+  		$('#btn-download').on('click', function() {
+  			if (getCanvas === undefined) {
+  				html2canvas(container, {
+  					onrendered: function(canvas) {
+  						// $("#preview-image").append(canvas);
+  						getCanvas = canvas;
+  						$('#btn-download').html('Download');
+  						var imgageData = getCanvas.toDataURL("image/png", 1);
+  						var newData = imgageData.replace(
+  							/^data:image\/png/, "data:application/octet-stream");
+
+  						// window.location.href = newData;
+  						$("#btn-download").attr("download", "invoice.png").attr("href", newData);
+  					}
+  				});
+
+  			}
+  		});
+
   		var $dtBasic = $("#table-transaction");
 
   		// Methods
@@ -112,6 +159,7 @@
   				"lengthChange": false,
   				"order": [],
   				"bInfo": false,
+  				searching: true,
   				language: {
   					paginate: {
   						previous: "<i class='fas fa-angle-left'>",

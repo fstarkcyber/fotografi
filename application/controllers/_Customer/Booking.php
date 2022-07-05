@@ -49,13 +49,32 @@ class Booking extends MY_Controller
 
 		foreach ($trx as $tr) {
 			$status = '';
-			$action = '';
+			$action = '<a href="#!" class="table-action btn btn-warning btn-sm text-white btn-preview" 
+						data-name="' . $tr->name . '"  
+						data-email="' . $tr->email . '" 
+						data-note="' . $tr->note . '" 
+						data-id="' . $tr->id_transaction . '" 
+						data-price="' . number_format($tr->packet_price) . '" 
+						data-booking="' . $tr->booking_code . '" 
+						data-packet-name="' . $tr->packet_name . '" 
+						data-packet-price="' . $tr->packet_price . '" 
+						data-packet-duration="' . $tr->packet_duration . '" 
+						data-created-at="' . $tr->created_at . '" 
+						
+						title="Preview Invoice"><i class="fas fa-eye"></i></a>';
 
 			$date = $tr->datetime;
 
 			if ($tr->payment_date == NULL || $tr->payment_image == NULL) {
 				$status = '<span class="badge badge-danger">Menunggu Pembayaran</span>';
-				$action = '<a href="#!" class="table-action text-success btn-confirm" data-id="' . $tr->id_transaction . '" data-price="' . number_format($tr->packet_price) . '" data-booking="' . $tr->booking_code . '" title="Konfirmasi Pembayaran"><i class="fas fa-credit-card"></i></a>';
+				$action .= '<a href="#!" class="table-action btn btn-sm btn-success text-white btn-confirm" 
+								data-id="' . $tr->id_transaction . '" 
+								data-price="' . number_format($tr->packet_price) . '" 
+								data-booking="' . $tr->booking_code . '" 
+								data-packet-name="' . $tr->packet_name . '" 
+								data-packet-price="' . $tr->packet_price . '" 
+								data-booking="' . $tr->booking_code . '" 
+								title="Konfirmasi Pembayaran"><i class="fas fa-credit-card"></i></a>';
 			} else if ($tr->payment_validation_at == NULL || $tr->payment_validation_by == NULL) {
 				$status = '<span class="badge badge-warning">Menunggu Validasi</span>';
 			} else {

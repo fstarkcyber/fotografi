@@ -85,3 +85,68 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id="modal-preview-invoice" tabindex="-1" role="dialog" aria-labelledby="modal-preview-invoice" aria-hidden="true">
+	<div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header bg-primary">
+				<h6 class="modal-title text-white" id="modal-title-payment-confirm">Preview Invoice</h6>
+				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+
+			<div class="modal-body" id="image-container">
+				<h1 class="mb-2">Invoice #</h1>
+				<div class="row font-weight-bold">
+
+					<div class="col-md">
+						<label for="">Nama : <span class="name"></span></label>
+					</div>
+
+					<div class="col-md">
+						<label for="">Kode Booking : <span class="booking-code"></span></label>
+
+					</div>
+				</div>
+
+				<div class="row font-weight-bold">
+
+					<div class="col-md">
+						<label for="">Email : <span class="email"></span></label>
+					</div>
+
+					<div class="col-md">
+						<label for="">Tanggal Booking : <span class="created_at"></span></label>
+					</div>
+				</div>
+
+				<table class="table table-sm my-3">
+					<thead class="table-dark">
+						<th>Packet Name</th>
+						<th>Packet Price</th>
+						<th>Packet Duration</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="packet_name"></td>
+							<td class="packet_price"></td>
+							<td class="packet_duration"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<small class="note"></small>
+				<div id="preview-image"></div>
+			</div>
+
+			<div class="modal-footer">
+				<a href="#" id="btn-download" class="btn btn-primary text-white">Generate</a>
+				<button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>
